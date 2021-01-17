@@ -1,0 +1,21 @@
+name: pymc3-tutorials
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pandas
+  - numpy
+  - arviz
+  - seaborn
+  - matplotlib
+  - pymc3
+  - jupyterlab
+  - plotnine
+  - pre-commit
+  - conda
+  - nbqa
+  - jupyterlab_code_formatter
+  - mypy
+  - isort
+prefix: /usr/local/Caskroom/miniconda/base/envs/pymc3-tutorials
