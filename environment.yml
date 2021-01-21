@@ -3,7 +3,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.8
+  - python
   - pandas
   - numpy
   - arviz
@@ -17,5 +17,8 @@ dependencies:
   - nbqa
   - jupyterlab_code_formatter
   - mypy
+  - black
   - isort
+  - jupyterlab-lsp
+  - python-language-server
 prefix: /usr/local/Caskroom/miniconda/base/envs/pymc3-tutorials
