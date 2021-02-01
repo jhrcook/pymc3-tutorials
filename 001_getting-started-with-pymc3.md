@@ -52,7 +52,7 @@ d = pd.DataFrame({"X1": X1, "X2": X2, "Y": Y}).melt(id_vars="Y")
 
 ![png](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_3_1.png)
 
-    <ggplot: (283518341)>
+    <ggplot: (349776827)>
 
 ```python
 with pm.Model() as basic_model:
@@ -86,10 +86,10 @@ with pm.Model() as basic_model:
         }
     </style>
   <progress value='12000' class='' max='12000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [12000/12000 00:20<00:00 Sampling 2 chains, 0 divergences]
+  100.00% [12000/12000 00:12<00:00 Sampling 2 chains, 0 divergences]
 </div>
 
-    Sampling 2 chains for 1_000 tune and 5_000 draw iterations (2_000 + 10_000 draws total) took 31 seconds.
+    Sampling 2 chains for 1_000 tune and 5_000 draw iterations (2_000 + 10_000 draws total) took 23 seconds.
 
 ```python
 az.plot_trace(trace, compact=False)
@@ -229,7 +229,7 @@ returns = pd.read_csv(
 
 ![png](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_8_0.png)
 
-    <ggplot: (355848084)>
+    <ggplot: (351797041)>
 
 Use a `GaussianRandomWalk` as the prior for the latent volatilities.
 It is a vector-valued distribution where the values of the vector form a random normal walk of length $n$, specified by the `shape` parameter.
@@ -302,10 +302,10 @@ with sp500_model:
         }
     </style>
   <progress value='6000' class='' max='6000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [6000/6000 10:15<00:00 Sampling 2 chains, 0 divergences]
+  100.00% [6000/6000 08:22<00:00 Sampling 2 chains, 0 divergences]
 </div>
 
-    Sampling 2 chains for 1_000 tune and 2_000 draw iterations (2_000 + 4_000 draws total) took 627 seconds.
+    Sampling 2 chains for 1_000 tune and 2_000 draw iterations (2_000 + 4_000 draws total) took 512 seconds.
 
 
     0, dim: date, 2906 =? 2906
@@ -327,27 +327,152 @@ plt.show()
 
 ![png](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_15_2.png)
 
+```python
+volatility_post = 1 / np.exp(trace["s", ::5].T)
+volatility_post_hdi = az.hdi(volatility_post.T, hdi_prob=0.89)
+plot_data = returns.copy()
+plot_data["volatility"] = volatility_post.mean(axis=1)
+plot_data["volatility_lower"] = volatility_post_hdi[:, 0]
+plot_data["volatility_high"] = volatility_post_hdi[:, 1]
+
+(
+    gg.ggplot(plot_data, gg.aes(x="Date"))
+    + gg.geom_line(gg.aes(y="change"), alpha=0.2, size=0.5)
+    + gg.geom_ribbon(
+        gg.aes(ymin="volatility_lower", ymax="volatility_high"),
+        alpha=0.7,
+        fill="#EF5BDE",
+    )
+    + gg.geom_line(gg.aes(y="volatility"), alpha=0.8, color="#A10D90", size=1)
+    + gg.labs(x="date", y="daily returns", title="Volatility of the S&P 500 since 2008")
+)
+```
+
+    /usr/local/Caskroom/miniconda/base/envs/pymc3-tutorials/lib/python3.9/site-packages/arviz/stats/stats.py:493: FutureWarning: hdi currently interprets 2d data as (draw, shape) but this will change in a future release to (chain, draw) for coherence with other functions
+
+![png](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_16_1.png)
+
+    <ggplot: (351180939)>
+
+## Case Study 2: Coal mining disasters
+
+Data is a time series of recorded coal mining disasters in the UK from 1851 to 1962.
+The number of disasters is affected by changes in safety regulations.
+There are two years with missing data, but *these missing values with be automatically imputed by PyMC3*.
+
+Build a model to estimate when the change occurred and see how the model handles missing data.
+
+```python
+disasters_data = pd.read_csv("data/mining_disasters.txt", header=None)
+disasters_data.columns = ["n_disasters"]
+disasters_data[["year"]] = np.arange(1851, 1962)
+disasters_data.head()
+```
+
+```python
+# Missing data
+disasters_data[disasters_data.n_disasters.isna()]
+```
+
+```python
+(
+    gg.ggplot(
+        disasters_data[~disasters_data.n_disasters.isna()],
+        gg.aes(x="year", y="n_disasters"),
+    )
+    + gg.geom_smooth(se=False, linetype="--", color="#BC272A")
+    + gg.geom_line(group="a", alpha=0.2, color="#3F7BB1")
+    + gg.geom_point(color="#3F7BB1")
+    + gg.labs(x="year", y="disaster count")
+)
+```
+
+The occurrence of disasters follows a Poisson process with a large rate parameter early on but a smaller parameter later.
+We want to locate the change point in the series.
+
+$$
+\begin{align}
+D_t & \sim \text{Pois}(r_t), r_t =
+\begin{cases}
+ e, & \text{if } t \leq s \\
+ l, & \text{if } t \gt s
+\end{cases} \\
+s & \sim \text{Unif}(t_l, t_h) \\
+e & \sim \exp(1) \\
+l & \sim \exp(1)
+\end{align}
+$$
+
+In this model, $s$ is the switchpoint between "early" and "late" rate parameters ($e$ and $l$).
+
+```python
+with pm.Model() as disaster_model:
+
+    # Data
+    years_shared = pm.Data("years_shared", disasters_data.year)
+    disasters_shared = pm.Data("disasters_shared", disasters_data.n_disasters)
+
+    # Switchpiont
+    switchpoint = pm.DiscreteUniform(
+        "switchpoint", lower=years_shared.min(), upper=years_shared.max(), testval=1900
+    )
+
+    # Priors for early and late rates.
+    early_rate = pm.Exponential("early_rate", 1.0)
+    late_rate = pm.Exponential("late_rate", 1.0)
+
+    # Allocate appropriate Poisson rates using the switchpoint.
+    rate = pm.math.switch(switchpoint >= years_shared, early_rate, late_rate)
+
+    # Observed data.
+    disasters = pm.Poisson("disasters", rate, observed=disasters_shared)
+```
+
+```python
+pm.model_to_graphviz(disaster_model)
+```
+
+NUTS cannot be used to sample because the data is discrete.
+Instead, need to use a Metropolis step method that implements adaptive Metropolis-Hastings.
+PyMC3 handles this automatically.
+
+**TODO: use this [link](http://stronginference.com/missing-data-imputation.html) to create a masked array for data imputation.**
+
+```python
+with disaster_model:
+    trace = pm.sample(10000, random_seed=RANDOM_SEED)
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
 ---
 
 ```python
 %load_ext watermark
 %watermark -n -u -v -iv -w
 ```
-
-    Last updated: Thu Jan 21 2021
-
-    Python implementation: CPython
-    Python version       : 3.9.1
-    IPython version      : 7.19.0
-
-    plotnine  : 0.7.1
-    pymc3     : 3.9.3
-    pandas    : 1.2.0
-    arviz     : 0.11.0
-    matplotlib: 3.3.3
-    numpy     : 1.19.5
-
-    Watermark: 2.1.0
 
 ```python
 

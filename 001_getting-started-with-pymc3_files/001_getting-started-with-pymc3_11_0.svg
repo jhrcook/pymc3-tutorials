@@ -11,86 +11,86 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-539.81 360.4,-539.81 360.4,4 -4,4"/>
 <g id="clust1" class="cluster">
 <title>cluster2,906</title>
-<path fill="none" stroke="black" d="M138.4,-8C138.4,-8 336.4,-8 336.4,-8 342.4,-8 348.4,-14 348.4,-20 348.4,-20 348.4,-420.86 348.4,-420.86 348.4,-426.86 342.4,-432.86 336.4,-432.86 336.4,-432.86 138.4,-432.86 138.4,-432.86 132.4,-432.86 126.4,-426.86 126.4,-420.86 126.4,-420.86 126.4,-20 126.4,-20 126.4,-14 132.4,-8 138.4,-8"/>
-<text text-anchor="middle" x="324.4" y="-15.8" font-family="Times,serif" font-size="14.00">2,906</text>
-</g>
-<!-- volatility_process -->
-<g id="node1" class="node">
-<title>volatility_process</title>
-<polygon fill="none" stroke="black" points="273.4,-302.93 157.4,-302.93 157.4,-249.93 273.4,-249.93 273.4,-302.93"/>
-<text text-anchor="middle" x="215.4" y="-287.73" font-family="Times,serif" font-size="14.00">volatility_process</text>
-<text text-anchor="middle" x="215.4" y="-272.73" font-family="Times,serif" font-size="14.00">~</text>
-<text text-anchor="middle" x="215.4" y="-257.73" font-family="Times,serif" font-size="14.00">Deterministic</text>
+<path fill="none" stroke="black" d="M20,-8C20,-8 218,-8 218,-8 224,-8 230,-14 230,-20 230,-20 230,-420.86 230,-420.86 230,-426.86 224,-432.86 218,-432.86 218,-432.86 20,-432.86 20,-432.86 14,-432.86 8,-426.86 8,-420.86 8,-420.86 8,-20 8,-20 8,-14 14,-8 20,-8"/>
+<text text-anchor="middle" x="206" y="-15.8" font-family="Times,serif" font-size="14.00">2,906</text>
 </g>
 <!-- r -->
-<g id="node4" class="node">
+<g id="node1" class="node">
 <title>r</title>
-<ellipse fill="lightgrey" stroke="black" cx="198.4" cy="-165.48" rx="48.17" ry="37.45"/>
-<text text-anchor="middle" x="198.4" y="-176.78" font-family="Times,serif" font-size="14.00">r</text>
-<text text-anchor="middle" x="198.4" y="-161.78" font-family="Times,serif" font-size="14.00">~</text>
-<text text-anchor="middle" x="198.4" y="-146.78" font-family="Times,serif" font-size="14.00">StudentT</text>
-</g>
-<!-- volatility_process&#45;&gt;r -->
-<g id="edge4" class="edge">
-<title>volatility_process&#45;&gt;r</title>
-<path fill="none" stroke="black" d="M211.41,-249.89C209.69,-238.87 207.63,-225.63 205.65,-212.97"/>
-<polygon fill="black" stroke="black" points="209.1,-212.34 204.1,-203 202.18,-213.42 209.1,-212.34"/>
+<ellipse fill="lightgrey" stroke="black" cx="160" cy="-165.48" rx="48.17" ry="37.45"/>
+<text text-anchor="middle" x="160" y="-176.78" font-family="Times,serif" font-size="14.00">r</text>
+<text text-anchor="middle" x="160" y="-161.78" font-family="Times,serif" font-size="14.00">~</text>
+<text text-anchor="middle" x="160" y="-146.78" font-family="Times,serif" font-size="14.00">StudentT</text>
 </g>
 <!-- returns -->
-<g id="node2" class="node">
-<title>returns</title>
-<path fill="lightgrey" stroke="black" d="M213.9,-92C213.9,-92 182.9,-92 182.9,-92 176.9,-92 170.9,-86 170.9,-80 170.9,-80 170.9,-51 170.9,-51 170.9,-45 176.9,-39 182.9,-39 182.9,-39 213.9,-39 213.9,-39 219.9,-39 225.9,-45 225.9,-51 225.9,-51 225.9,-80 225.9,-80 225.9,-86 219.9,-92 213.9,-92"/>
-<text text-anchor="middle" x="198.4" y="-76.8" font-family="Times,serif" font-size="14.00">returns</text>
-<text text-anchor="middle" x="198.4" y="-61.8" font-family="Times,serif" font-size="14.00">~</text>
-<text text-anchor="middle" x="198.4" y="-46.8" font-family="Times,serif" font-size="14.00">Data</text>
-</g>
-<!-- s -->
 <g id="node3" class="node">
-<title>s</title>
-<ellipse fill="none" stroke="black" cx="237.4" cy="-387.38" rx="103.48" ry="37.45"/>
-<text text-anchor="middle" x="237.4" y="-398.68" font-family="Times,serif" font-size="14.00">s</text>
-<text text-anchor="middle" x="237.4" y="-383.68" font-family="Times,serif" font-size="14.00">~</text>
-<text text-anchor="middle" x="237.4" y="-368.68" font-family="Times,serif" font-size="14.00">GaussianRandomWalk</text>
-</g>
-<!-- s&#45;&gt;volatility_process -->
-<g id="edge3" class="edge">
-<title>s&#45;&gt;volatility_process</title>
-<path fill="none" stroke="black" d="M230.01,-349.8C227.62,-337.94 224.96,-324.81 222.58,-313.03"/>
-<polygon fill="black" stroke="black" points="225.99,-312.19 220.58,-303.08 219.13,-313.58 225.99,-312.19"/>
+<title>returns</title>
+<path fill="lightgrey" stroke="black" d="M175.5,-92C175.5,-92 144.5,-92 144.5,-92 138.5,-92 132.5,-86 132.5,-80 132.5,-80 132.5,-51 132.5,-51 132.5,-45 138.5,-39 144.5,-39 144.5,-39 175.5,-39 175.5,-39 181.5,-39 187.5,-45 187.5,-51 187.5,-51 187.5,-80 187.5,-80 187.5,-86 181.5,-92 175.5,-92"/>
+<text text-anchor="middle" x="160" y="-76.8" font-family="Times,serif" font-size="14.00">returns</text>
+<text text-anchor="middle" x="160" y="-61.8" font-family="Times,serif" font-size="14.00">~</text>
+<text text-anchor="middle" x="160" y="-46.8" font-family="Times,serif" font-size="14.00">Data</text>
 </g>
 <!-- r&#45;&gt;returns -->
 <g id="edge1" class="edge">
 <title>r&#45;&gt;returns</title>
-<path fill="none" stroke="black" d="M198.4,-127.99C198.4,-119.58 198.4,-110.63 198.4,-102.25"/>
-<polygon fill="black" stroke="black" points="201.9,-102.01 198.4,-92.01 194.9,-102.01 201.9,-102.01"/>
+<path fill="none" stroke="black" d="M160,-127.99C160,-119.58 160,-110.63 160,-102.25"/>
+<polygon fill="black" stroke="black" points="163.5,-102.01 160,-92.01 156.5,-102.01 163.5,-102.01"/>
+</g>
+<!-- volatility_process -->
+<g id="node2" class="node">
+<title>volatility_process</title>
+<polygon fill="none" stroke="black" points="191,-302.93 75,-302.93 75,-249.93 191,-249.93 191,-302.93"/>
+<text text-anchor="middle" x="133" y="-287.73" font-family="Times,serif" font-size="14.00">volatility_process</text>
+<text text-anchor="middle" x="133" y="-272.73" font-family="Times,serif" font-size="14.00">~</text>
+<text text-anchor="middle" x="133" y="-257.73" font-family="Times,serif" font-size="14.00">Deterministic</text>
+</g>
+<!-- volatility_process&#45;&gt;r -->
+<g id="edge5" class="edge">
+<title>volatility_process&#45;&gt;r</title>
+<path fill="none" stroke="black" d="M139.33,-249.89C142.09,-238.77 145.4,-225.39 148.56,-212.63"/>
+<polygon fill="black" stroke="black" points="152.04,-213.13 151.05,-202.59 145.25,-211.45 152.04,-213.13"/>
+</g>
+<!-- s -->
+<g id="node4" class="node">
+<title>s</title>
+<ellipse fill="none" stroke="black" cx="119" cy="-387.38" rx="103.48" ry="37.45"/>
+<text text-anchor="middle" x="119" y="-398.68" font-family="Times,serif" font-size="14.00">s</text>
+<text text-anchor="middle" x="119" y="-383.68" font-family="Times,serif" font-size="14.00">~</text>
+<text text-anchor="middle" x="119" y="-368.68" font-family="Times,serif" font-size="14.00">GaussianRandomWalk</text>
+</g>
+<!-- s&#45;&gt;volatility_process -->
+<g id="edge3" class="edge">
+<title>s&#45;&gt;volatility_process</title>
+<path fill="none" stroke="black" d="M123.7,-349.8C125.22,-337.94 126.91,-324.81 128.43,-313.03"/>
+<polygon fill="black" stroke="black" points="131.9,-313.45 129.7,-303.08 124.96,-312.55 131.9,-313.45"/>
 </g>
 <!-- nu -->
 <g id="node5" class="node">
 <title>nu</title>
-<ellipse fill="none" stroke="black" cx="59.4" cy="-276.43" rx="59.29" ry="37.45"/>
-<text text-anchor="middle" x="59.4" y="-287.73" font-family="Times,serif" font-size="14.00">nu</text>
-<text text-anchor="middle" x="59.4" y="-272.73" font-family="Times,serif" font-size="14.00">~</text>
-<text text-anchor="middle" x="59.4" y="-257.73" font-family="Times,serif" font-size="14.00">Exponential</text>
+<ellipse fill="none" stroke="black" cx="297" cy="-276.43" rx="59.29" ry="37.45"/>
+<text text-anchor="middle" x="297" y="-287.73" font-family="Times,serif" font-size="14.00">nu</text>
+<text text-anchor="middle" x="297" y="-272.73" font-family="Times,serif" font-size="14.00">~</text>
+<text text-anchor="middle" x="297" y="-257.73" font-family="Times,serif" font-size="14.00">Exponential</text>
 </g>
 <!-- nu&#45;&gt;r -->
-<g id="edge5" class="edge">
+<g id="edge4" class="edge">
 <title>nu&#45;&gt;r</title>
-<path fill="none" stroke="black" d="M95.92,-246.8C114.64,-232.13 137.52,-214.2 156.9,-199"/>
-<polygon fill="black" stroke="black" points="159.26,-201.6 164.98,-192.67 154.95,-196.09 159.26,-201.6"/>
+<path fill="none" stroke="black" d="M260.65,-246.52C242.33,-231.96 220.06,-214.24 201.12,-199.18"/>
+<polygon fill="black" stroke="black" points="203.24,-196.39 193.23,-192.91 198.88,-201.87 203.24,-196.39"/>
 </g>
 <!-- sigma -->
 <g id="node6" class="node">
 <title>sigma</title>
-<ellipse fill="none" stroke="black" cx="237.4" cy="-498.34" rx="59.29" ry="37.45"/>
-<text text-anchor="middle" x="237.4" y="-509.64" font-family="Times,serif" font-size="14.00">sigma</text>
-<text text-anchor="middle" x="237.4" y="-494.64" font-family="Times,serif" font-size="14.00">~</text>
-<text text-anchor="middle" x="237.4" y="-479.64" font-family="Times,serif" font-size="14.00">Exponential</text>
+<ellipse fill="none" stroke="black" cx="119" cy="-498.34" rx="59.29" ry="37.45"/>
+<text text-anchor="middle" x="119" y="-509.64" font-family="Times,serif" font-size="14.00">sigma</text>
+<text text-anchor="middle" x="119" y="-494.64" font-family="Times,serif" font-size="14.00">~</text>
+<text text-anchor="middle" x="119" y="-479.64" font-family="Times,serif" font-size="14.00">Exponential</text>
 </g>
 <!-- sigma&#45;&gt;s -->
 <g id="edge2" class="edge">
 <title>sigma&#45;&gt;s</title>
-<path fill="none" stroke="black" d="M237.4,-460.75C237.4,-452.58 237.4,-443.8 237.4,-435.27"/>
-<polygon fill="black" stroke="black" points="240.9,-435.06 237.4,-425.06 233.9,-435.06 240.9,-435.06"/>
+<path fill="none" stroke="black" d="M119,-460.75C119,-452.58 119,-443.8 119,-435.27"/>
+<polygon fill="black" stroke="black" points="122.5,-435.06 119,-425.06 115.5,-435.06 122.5,-435.06"/>
 </g>
 </g>
 </svg>
