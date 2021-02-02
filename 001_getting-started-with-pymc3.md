@@ -11,10 +11,10 @@ import plotnine as gg
 import pymc3 as pm
 
 %config InlineBackend.figure_format = "retina"
-RANDOM_SEED = 8927
-np.random.seed(RANDOM_SEED)
 az.style.use("arviz-darkgrid")
 gg.theme_set(gg.theme_minimal)
+RANDOM_SEED = 8927
+np.random.seed(RANDOM_SEED)
 ```
 
 ## A Motivating Example: Linear Regression
@@ -52,7 +52,7 @@ d = pd.DataFrame({"X1": X1, "X2": X2, "Y": Y}).melt(id_vars="Y")
 
 ![png](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_3_1.png)
 
-    <ggplot: (349776827)>
+    <ggplot: (353867114)>
 
 ```python
 with pm.Model() as basic_model:
@@ -64,7 +64,7 @@ with pm.Model() as basic_model:
 
     Y_obs = pm.Normal("Y_obs", mu=mu, sigma=sigma, observed=Y)
 
-    trace = pm.sample(5000, return_inferencedata=True)
+    trace = pm.sample(1000, return_inferencedata=True)
 ```
 
     Auto-assigning NUTS sampler...
@@ -85,11 +85,11 @@ with pm.Model() as basic_model:
             background: #F44336;
         }
     </style>
-  <progress value='12000' class='' max='12000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [12000/12000 00:12<00:00 Sampling 2 chains, 0 divergences]
+  <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [4000/4000 00:16<00:00 Sampling 2 chains, 0 divergences]
 </div>
 
-    Sampling 2 chains for 1_000 tune and 5_000 draw iterations (2_000 + 10_000 draws total) took 23 seconds.
+    Sampling 2 chains for 1_000 tune and 1_000 draw iterations (2_000 + 2_000 draws total) took 27 seconds.
 
 ```python
 az.plot_trace(trace, compact=False)
@@ -136,63 +136,65 @@ az.summary(trace)
   <tbody>
     <tr>
       <th>alpha</th>
-      <td>0.958</td>
-      <td>0.107</td>
-      <td>0.759</td>
-      <td>1.162</td>
+      <td>0.955</td>
+      <td>0.108</td>
+      <td>0.739</td>
+      <td>1.144</td>
+      <td>0.002</td>
       <td>0.001</td>
-      <td>0.001</td>
-      <td>15834.0</td>
-      <td>15524.0</td>
-      <td>15831.0</td>
-      <td>8046.0</td>
+      <td>2722.0</td>
+      <td>2620.0</td>
+      <td>2757.0</td>
+      <td>1306.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>beta[0]</th>
-      <td>1.101</td>
+      <td>1.100</td>
       <td>0.114</td>
-      <td>0.893</td>
-      <td>1.319</td>
-      <td>0.001</td>
-      <td>0.001</td>
-      <td>13106.0</td>
-      <td>12921.0</td>
-      <td>13088.0</td>
-      <td>7863.0</td>
+      <td>0.885</td>
+      <td>1.311</td>
+      <td>0.002</td>
+      <td>0.002</td>
+      <td>2606.0</td>
+      <td>2606.0</td>
+      <td>2604.0</td>
+      <td>1611.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>beta[1]</th>
       <td>2.952</td>
-      <td>0.540</td>
-      <td>1.891</td>
-      <td>3.920</td>
-      <td>0.004</td>
-      <td>0.003</td>
-      <td>15443.0</td>
-      <td>14832.0</td>
-      <td>15497.0</td>
-      <td>7830.0</td>
+      <td>0.527</td>
+      <td>1.916</td>
+      <td>3.905</td>
+      <td>0.009</td>
+      <td>0.006</td>
+      <td>3411.0</td>
+      <td>3328.0</td>
+      <td>3431.0</td>
+      <td>1531.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma</th>
       <td>1.064</td>
-      <td>0.079</td>
-      <td>0.917</td>
-      <td>1.209</td>
+      <td>0.077</td>
+      <td>0.923</td>
+      <td>1.207</td>
       <td>0.001</td>
       <td>0.001</td>
-      <td>12512.0</td>
-      <td>12036.0</td>
-      <td>13024.0</td>
-      <td>7047.0</td>
+      <td>2722.0</td>
+      <td>2715.0</td>
+      <td>2780.0</td>
+      <td>1433.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
 </table>
 </div>
+
+---
 
 ## Case Study 1: Stochastic volatility
 
@@ -229,7 +231,7 @@ returns = pd.read_csv(
 
 ![png](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_8_0.png)
 
-    <ggplot: (351797041)>
+    <ggplot: (354016573)>
 
 Use a `GaussianRandomWalk` as the prior for the latent volatilities.
 It is a vector-valued distribution where the values of the vector form a random normal walk of length $n$, specified by the `shape` parameter.
@@ -302,10 +304,10 @@ with sp500_model:
         }
     </style>
   <progress value='6000' class='' max='6000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [6000/6000 08:22<00:00 Sampling 2 chains, 0 divergences]
+  100.00% [6000/6000 08:52<00:00 Sampling 2 chains, 0 divergences]
 </div>
 
-    Sampling 2 chains for 1_000 tune and 2_000 draw iterations (2_000 + 4_000 draws total) took 512 seconds.
+    Sampling 2 chains for 1_000 tune and 2_000 draw iterations (2_000 + 4_000 draws total) took 542 seconds.
 
 
     0, dim: date, 2906 =? 2906
@@ -352,7 +354,9 @@ plot_data["volatility_high"] = volatility_post_hdi[:, 1]
 
 ![png](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_16_1.png)
 
-    <ggplot: (351180939)>
+    <ggplot: (355534207)>
+
+---
 
 ## Case Study 2: Coal mining disasters
 
@@ -369,10 +373,99 @@ disasters_data[["year"]] = np.arange(1851, 1962)
 disasters_data.head()
 ```
 
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n_disasters</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4.0</td>
+      <td>1851</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5.0</td>
+      <td>1852</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.0</td>
+      <td>1853</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>1854</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.0</td>
+      <td>1855</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 ```python
 # Missing data
 disasters_data[disasters_data.n_disasters.isna()]
 ```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n_disasters</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>39</th>
+      <td>NaN</td>
+      <td>1890</td>
+    </tr>
+    <tr>
+      <th>83</th>
+      <td>NaN</td>
+      <td>1934</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ```python
 (
@@ -386,6 +479,10 @@ disasters_data[disasters_data.n_disasters.isna()]
     + gg.labs(x="year", y="disaster count")
 )
 ```
+
+![png](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_20_0.png)
+
+    <ggplot: (356626845)>
 
 The occurrence of disasters follows a Poisson process with a large rate parameter early on but a smaller parameter later.
 We want to locate the change point in the series.
@@ -406,15 +503,17 @@ $$
 In this model, $s$ is the switchpoint between "early" and "late" rate parameters ($e$ and $l$).
 
 ```python
+
+```
+
+```python
 with pm.Model() as disaster_model:
-
-    # Data
-    years_shared = pm.Data("years_shared", disasters_data.year)
-    disasters_shared = pm.Data("disasters_shared", disasters_data.n_disasters)
-
     # Switchpiont
     switchpoint = pm.DiscreteUniform(
-        "switchpoint", lower=years_shared.min(), upper=years_shared.max(), testval=1900
+        "switchpoint",
+        lower=disasters_data.year.min(),
+        upper=disasters_data.year.max(),
+        testval=1900,
     )
 
     # Priors for early and late rates.
@@ -422,50 +521,284 @@ with pm.Model() as disaster_model:
     late_rate = pm.Exponential("late_rate", 1.0)
 
     # Allocate appropriate Poisson rates using the switchpoint.
-    rate = pm.math.switch(switchpoint >= years_shared, early_rate, late_rate)
+    rate = pm.math.switch(switchpoint >= disasters_data.year, early_rate, late_rate)
 
     # Observed data.
-    disasters = pm.Poisson("disasters", rate, observed=disasters_shared)
+    disasters = pm.Poisson("disasters", rate, observed=disasters_data.n_disasters)
 ```
+
+    /usr/local/Caskroom/miniconda/base/envs/pymc3-tutorials/lib/python3.9/site-packages/pymc3/model.py:1668: ImputationWarning: Data in disasters contains missing values and will be automatically imputed from the sampling distribution.
 
 ```python
 pm.model_to_graphviz(disaster_model)
 ```
 
+![svg](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_24_0.svg)
+
 NUTS cannot be used to sample because the data is discrete.
 Instead, need to use a Metropolis step method that implements adaptive Metropolis-Hastings.
 PyMC3 handles this automatically.
-
-**TODO: use this [link](http://stronginference.com/missing-data-imputation.html) to create a masked array for data imputation.**
 
 ```python
 with disaster_model:
     trace = pm.sample(10000, random_seed=RANDOM_SEED)
 ```
 
-```python
+    Multiprocess sampling (2 chains in 2 jobs)
+    CompoundStep
+    >CompoundStep
+    >>Metropolis: [disasters_missing]
+    >>Metropolis: [switchpoint]
+    >NUTS: [late_rate, early_rate]
 
+<div>
+    <style>
+        /*Turns off some styling*/
+        progress {
+            /*gets rid of default border in Firefox and Opera.*/
+            border: none;
+            /*Needs to be in here for Safari polyfill so background images work as expected.*/
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='22000' class='' max='22000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [22000/22000 00:25<00:00 Sampling 2 chains, 0 divergences]
+</div>
+
+    Sampling 2 chains for 1_000 tune and 10_000 draw iterations (2_000 + 20_000 draws total) took 35 seconds.
+    The number of effective samples is smaller than 10% for some parameters.
+
+```python
+disaster_az = az.from_pymc3(trace=trace, model=disaster_model)
 ```
 
 ```python
-
+az.plot_trace(disaster_az)
+plt.show()
 ```
+
+![png](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_28_0.png)
+
+Posterior distribution for the switchpoint.
 
 ```python
-
+switchpoint_post = pd.DataFrame({"switchpoint": trace["switchpoint"]})
+(
+    gg.ggplot(switchpoint_post, gg.aes(x="switchpoint"))
+    + gg.geom_histogram(binwidth=1, alpha=0.4, size=0.5, color="black", fill="black")
+    + gg.scale_x_continuous(breaks=disasters_data.year)
+    + gg.scale_y_continuous(expand=(0, 0, 0.02, 0))
+    + gg.theme(axis_text_x=gg.element_text(angle=45, ha="right"))
+)
 ```
+
+![png](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_30_0.png)
+
+    <ggplot: (356303463)>
+
+Posterior predictions automatically generated for missing data.
 
 ```python
+missing_data_imputation = pd.DataFrame(
+    trace["disasters_missing"], columns=["missing data 1", "missing data 2"]
+).melt()
 
+(
+    gg.ggplot(missing_data_imputation, gg.aes(x="value"))
+    + gg.facet_wrap("variable", nrow=1)
+    + gg.geom_histogram(binwidth=1, alpha=0.4, size=0.5, color="black", fill="black")
+    + gg.scale_y_continuous(expand=(0, 0, 0.02, 0))
+    + gg.labs(
+        x="expected number of disasters",
+        y="count",
+        title="Posterior predictions for missing data",
+    )
+)
 ```
+
+    /usr/local/Caskroom/miniconda/base/envs/pymc3-tutorials/lib/python3.9/site-packages/plotnine/facets/facet_wrap.py:215: UserWarning: This figure was using constrained_layout==True, but that is incompatible with subplots_adjust and or tight_layout: setting constrained_layout==False.
+
+![png](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_32_1.png)
+
+    <ggplot: (356505432)>
+
+The following plot shows the results of the fit model on top of the original data.
+The switchpoint is shown in dark red with its 89% CI in dashed lines and the black dashed line is the accident rate.
+The estimates for the imputed data are also shown as green points with 89% CI.
 
 ```python
+# Switchpoint summary stats.
+switchpoint_mean = trace["switchpoint"].mean()
+switchpoint_hdi = az.hdi(trace["switchpoint"], hdi_prob=0.89)
 
+# Accident rate over all years.
+average_disasters = np.zeros_like(disasters_data.n_disasters, dtype="float")
+for i, year in enumerate(disasters_data.year):
+    idx = year < trace["switchpoint"]
+    average_disasters[i] = np.mean(
+        np.where(idx, trace["early_rate"], trace["late_rate"])
+    )
+
+average_disasters_df = pd.DataFrame(
+    {"avg_disasters": average_disasters, "year": disasters_data.year}
+)
+
+# Imputed data summary.
+disaster_impute_summary = az.summary(
+    trace, var_names="disasters_missing", hdi_prob=0.89, kind="stats"
+)
+disaster_impute_summary["year"] = disasters_data[
+    disasters_data.n_disasters.isna()
+].year.values
+
+# Plotting
+switchpoint_color = "#BC272A"
+impute_color = "#12853B"
+(
+    gg.ggplot(disasters_data, gg.aes(x="year"))
+    + gg.geom_point(gg.aes(y="n_disasters"), color="#3F7BB1", size=1, alpha=0.5)
+    + gg.geom_line(
+        gg.aes(y="avg_disasters"), data=average_disasters_df, linetype="--", size=1
+    )
+    + gg.geom_vline(xintercept=switchpoint_hdi, linetype="--", color=switchpoint_color)
+    + gg.geom_vline(xintercept=switchpoint_mean, color=switchpoint_color, size=1)
+    + gg.geom_linerange(
+        gg.aes(ymin="hdi_5.5%", ymax="hdi_94.5%"),
+        data=disaster_impute_summary,
+        color=impute_color,
+        size=0.8,
+        alpha=0.5,
+    )
+    + gg.geom_point(
+        gg.aes(y="mean"),
+        data=disaster_impute_summary,
+        color=impute_color,
+        size=2.5,
+        alpha=0.8,
+    )
+    + gg.scale_y_continuous(expand=(0.01, 0, 0.02, 0))
+    + gg.labs(x="year", y="number of accidents")
+)
 ```
+
+    /usr/local/Caskroom/miniconda/base/envs/pymc3-tutorials/lib/python3.9/site-packages/arviz/data/io_pymc3.py:88: FutureWarning: Using `from_pymc3` without the model will be deprecated in a future release. Not using the model will return less accurate and less useful results. Make sure you use the model argument or call from_pymc3 within a model context.
+    /usr/local/Caskroom/miniconda/base/envs/pymc3-tutorials/lib/python3.9/site-packages/plotnine/layer.py:467: PlotnineWarning: geom_point : Removed 2 rows containing missing values.
+
+![png](001_getting-started-with-pymc3_files/001_getting-started-with-pymc3_34_1.png)
+
+    <ggplot: (357116335)>
+
+---
+
+## Arbitrary deterministics
+
+PyMC3 provides many mathematical functions and operators for transofmring random variables into new random variables.
+Since it is not exhaustive, Theano and PyMC3 provide functionality for creating arbitary Theano functinos in Python that can be used in PyMC3 models.
+This is supported throught the `@as_op` function operator.
+
+The main limitation, though, is that Theano cannot inspect these functions to compute the gradient required for Hamiltonian-based samplers.
+This means it is not possible to use the HMC nor NUTS samplers for models that use the function.
+A work around is to inherit from `theno.Op` instead of using the `@as_op` decorator.
 
 ```python
+import theano.tensor as tt
+from theano.compile.ops import as_op
 
+
+@as_op(itypes=[tt.lscalar], otypes=[tt.lscalar])
+def crazy_modulo3(value):
+    if value > 0:
+        return value % 3
+    else:
+        return (-value + 1) % 3
+
+
+with pm.Model() as model_deterministic:
+    a = pm.Poisson("a", 1)
+    b = crazy_modulo3(a)
 ```
+
+---
+
+## Generalized Linear Models
+
+PyMC3 provides the `glm` submodule for constructing GLMs using the R formula language (using the [patsy](https://patsy.readthedocs.io/en/latest/) library).
+
+```python
+from pymc3.glm import GLM
+
+d = pd.DataFrame({"X1": X1, "X2": X2, "Y": Y})
+
+with pm.Model() as model_glm:
+    GLM.from_formula("Y ~ X1 + X2", d)
+    trace = pm.sample()
+```
+
+    Auto-assigning NUTS sampler...
+    Initializing NUTS using jitter+adapt_diag...
+    Multiprocess sampling (2 chains in 2 jobs)
+    NUTS: [sd, X2, X1, Intercept]
+
+<div>
+    <style>
+        /*Turns off some styling*/
+        progress {
+            /*gets rid of default border in Firefox and Opera.*/
+            border: none;
+            /*Needs to be in here for Safari polyfill so background images work as expected.*/
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [4000/4000 00:06<00:00 Sampling 2 chains, 0 divergences]
+</div>
+
+    Sampling 2 chains for 1_000 tune and 1_000 draw iterations (2_000 + 2_000 draws total) took 15 seconds.
+
+Below is an example of a logisitic model.
+
+```python
+from pymc3.glm.families import Binomial
+
+d_logistic = d.assign(Y=lambda d: d.Y > np.median(d.Y))
+
+with pm.Model() as model_glm_logistic:
+    GLM.from_formula("Y ~ X1", d_logistic, family=Binomial())
+    trace = pm.sample()
+```
+
+    Auto-assigning NUTS sampler...
+    Initializing NUTS using jitter+adapt_diag...
+    Multiprocess sampling (2 chains in 2 jobs)
+    NUTS: [X1, Intercept]
+
+<div>
+    <style>
+        /*Turns off some styling*/
+        progress {
+            /*gets rid of default border in Firefox and Opera.*/
+            border: none;
+            /*Needs to be in here for Safari polyfill so background images work as expected.*/
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    </style>
+  <progress value='4000' class='' max='4000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  100.00% [4000/4000 00:06<00:00 Sampling 2 chains, 0 divergences]
+</div>
+
+    Sampling 2 chains for 1_000 tune and 1_000 draw iterations (2_000 + 2_000 draws total) took 14 seconds.
+    The acceptance probability does not match the target. It is 0.8891785452120076, but should be close to 0.8. Try to increase the number of tuning steps.
+
+The [Bambi](https://bambinos.github.io/bambi/) library provides a similar interface for designing hierarchical models.
 
 ---
 
@@ -473,6 +806,22 @@ with disaster_model:
 %load_ext watermark
 %watermark -n -u -v -iv -w
 ```
+
+    Last updated: Tue Feb 02 2021
+
+    Python implementation: CPython
+    Python version       : 3.9.1
+    IPython version      : 7.20.0
+
+    theano    : 1.0.5
+    numpy     : 1.20.0
+    arviz     : 0.11.0
+    matplotlib: 3.3.4
+    plotnine  : 0.7.1
+    pandas    : 1.2.1
+    pymc3     : 3.9.3
+
+    Watermark: 2.1.0
 
 ```python
 
