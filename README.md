@@ -18,3 +18,5 @@ A collection of Juypter notebooks that serve as my notes on tutorials and exampl
 ## Documentation
 
 **[PyMC3 Examples](https://docs.pymc.io/nb_examples/index.html)**
+
+1. [A Hierarchical model for rugby prediction](013_rugby-predictions.md)
