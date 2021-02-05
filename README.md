@@ -14,6 +14,7 @@ A collection of Juypter notebooks that serve as my notes on tutorials and exampl
 1. [Getting Starting with PyMC3](001_getting-started-with-pymc3.md)
 2. [Sample Callback](005_sample-callback.md)
 3. [Profiling](010_profiling.md)
+4. [Batch ADVI and sampling](016_mini-batch-advi-on-hierarchical-regression.md)
 
 ## Documentation
 
