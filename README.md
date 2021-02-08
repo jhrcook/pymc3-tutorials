@@ -21,3 +21,4 @@ A collection of Juypter notebooks that serve as my notes on tutorials and exampl
 **[PyMC3 Examples](https://docs.pymc.io/nb_examples/index.html)**
 
 1. [A Hierarchical model for rugby prediction](013_rugby-predictions.md)
+2. [GLM: Negative Binomial Regression](018_glm-nb-regression.md)
