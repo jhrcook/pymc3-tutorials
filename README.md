@@ -23,3 +23,4 @@ A collection of Juypter notebooks that serve as my notes on tutorials and exampl
 1. [A Hierarchical model for rugby prediction](013_rugby-predictions.md)
 2. [GLM: Negative Binomial Regression](018_glm-nb-regression.md)
 3. [Hierarchical partial pooling of baseball batting averages](020_hierarchical-partial-pooling.md)
+4. [Bayesian Survival Analysis](022_bayesian-survival-analysis.md)
