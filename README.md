@@ -24,4 +24,4 @@ A collection of Juypter notebooks that serve as my notes on tutorials and exampl
 2. [GLM: Negative Binomial Regression](018_glm-nb-regression.md)
 3. [Hierarchical partial pooling of baseball batting averages](020_hierarchical-partial-pooling.md)
 4. [Bayesian Survival Analysis](022_bayesian-survival-analysis.md) (*in progress*)
-5. [LKJ Cholesky Covariance Priors for Multivariate Normal Models](024_lkj-cholesky-covariance-priors.md) (*in progress*)
+5. [LKJ Cholesky Covariance Priors for Multivariate Normal Models](024_lkj-cholesky-covariance-priors.md)
