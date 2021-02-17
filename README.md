@@ -15,6 +15,7 @@ A collection of Juypter notebooks that serve as my notes on tutorials and exampl
 2. [Sample Callback](005_sample-callback.md)
 3. [Profiling](010_profiling.md)
 4. [Batch ADVI and sampling](016_mini-batch-advi-on-hierarchical-regression.md)
+5. [Variational API Quuickstart](026_variational-api-quickstart.md)
 
 ## Documentation
 
@@ -25,3 +26,4 @@ A collection of Juypter notebooks that serve as my notes on tutorials and exampl
 3. [Hierarchical partial pooling of baseball batting averages](020_hierarchical-partial-pooling.md)
 4. [Bayesian Survival Analysis](022_bayesian-survival-analysis.md) (*in progress*)
 5. [LKJ Cholesky Covariance Priors for Multivariate Normal Models](024_lkj-cholesky-covariance-priors.md)
+6. Why hierarchcial models are awesome, tricky, and Bayesian (*planned*) ([original article](https://twiecki.io/blog/2017/02/08/bayesian-hierchical-non-centered/)) - covers non-centered paramaterization
