@@ -15,7 +15,7 @@ A collection of Juypter notebooks that serve as my notes on tutorials and exampl
 2. [Sample Callback](005_sample-callback.md)
 3. [Profiling](010_profiling.md)
 4. [Batch ADVI and sampling](016_mini-batch-advi-on-hierarchical-regression.md)
-5. [Variational API Quuickstart](026_variational-api-quickstart.md)
+5. [Variational API Quickstart](026_variational-api-quickstart.md)
 
 ## Documentation
 
