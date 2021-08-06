@@ -31,11 +31,6 @@ repos:
     rev: 1.1.0
     hooks:
     -   id: nbqa-isort
-        args: [--nbqa-mutate]
     -   id: nbqa-black
-        args: [--nbqa-mutate]
     -   id: nbqa-pyupgrade
-        args: [--nbqa-mutate]
     -   id: nbqa-mypy
-        args: [--nbqa-mutate]
-        types: [jupyter]
