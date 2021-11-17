@@ -7,7 +7,9 @@ A collection of Juypter notebooks that serve as my notes on tutorials and exampl
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-## Tutorials
+## Notebooks
+
+### Tutorials
 
 **[PyMC3 Tutorials](https://docs.pymc.io/nb_tutorials/index.html)**
 
@@ -18,7 +20,7 @@ A collection of Juypter notebooks that serve as my notes on tutorials and exampl
 5. [Variational API Quickstart](026_variational-api-quickstart.md)
 6. [Model building and expansion for golf putting](029_golf-putting-model.md)
 
-## Documentation
+### Documentation
 
 **[PyMC3 Examples](https://docs.pymc.io/nb_examples/index.html)**
 
@@ -28,3 +30,7 @@ A collection of Juypter notebooks that serve as my notes on tutorials and exampl
 4. [Bayesian Survival Analysis](022_bayesian-survival-analysis.md) (*in progress*)
 5. [LKJ Cholesky Covariance Priors for Multivariate Normal Models](024_lkj-cholesky-covariance-priors.md)
 6. Why hierarchcial models are awesome, tricky, and Bayesian (*planned*) ([original article](https://twiecki.io/blog/2017/02/08/bayesian-hierchical-non-centered/)) - covers non-centered paramaterization
+
+### Mine
+
+1. [Posterior predictions from a hierarchical model on a new group](032_new-group-predictions.md)

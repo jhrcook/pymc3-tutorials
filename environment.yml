@@ -12,7 +12,10 @@ dependencies:
   - jupyterlab==3.2.*
   - jupyterlab_code_formatter
   - graphviz
+  - theano-pymc
   - matplotlib
+  - mkl
+  - mkl-service
   - mypy
   - nbconvert
   - nbqa
@@ -21,6 +24,7 @@ dependencies:
   - plotnine==0.8.*
   - pre-commit
   - pyjanitor
-  - pymc3==3.11.*
+  - pymc3=3.11.2
+  - python-graphviz
   - seaborn
   - watermark

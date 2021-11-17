@@ -32,5 +32,4 @@ repos:
     hooks:
     -   id: nbqa-isort
     -   id: nbqa-black
-    -   id: nbqa-pyupgrade
     -   id: nbqa-mypy
